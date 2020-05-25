@@ -12,7 +12,7 @@ class bcolors:                          #This is to display colors in terminal
     UNDERLINE = '\033[4m'
 
 class Person:                                    #displaying measurable quantity of things possessed by player
-    def __init__(self,hp,mp,atk,df,magic):
+    def __init__(self,hp,mp,atk,df,magic,items):
         self.maxhp = hp
         self.hp = hp
         self.maxmp = mp
@@ -21,7 +21,8 @@ class Person:                                    #displaying measurable quantity
         self.atkl = atk-10
         self.df = df
         self.magic = magic
-        self.actions = ["attack","magic"]
+        self.items=items
+        self.actions = ["attack","magic","items"]
 
     def generate_damage(self):                      #Generating random damage by hitting
         return random.randrange(self.atkl,self.atkh)
@@ -32,8 +33,8 @@ class Person:                                    #displaying measurable quantity
             self.hp=0
         return self.hp
     def heal(self,dmg):
-        self.hp+=dmg
-        if self.hp>self.maxhp:
+        self.hp += dmg
+        if self.hp > self.maxhp:
             self.hp=self.maxhp
 
     def get_hp(self):
@@ -65,5 +66,8 @@ class Person:                                    #displaying measurable quantity
         for spell in self.magic:
             print(str(i)+':'+spell.name , '(cost' , str(spell.cost)+')')
             i+=1
-
+    def choose_items(self):
+        i=1
+        print("Items")
+        for
 

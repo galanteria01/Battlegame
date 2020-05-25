@@ -1,5 +1,8 @@
 from classes.game import Person,bcolors
 from classes.magic import Spell
+from classes.inventory import Item
+
+
 
 
 #Create black magic
@@ -9,13 +12,28 @@ blizzard=Spell("Blizzard",14,80,"black")
 meteor=Spell("Meteor",18,90,"black")
 quake=Spell("Quake",20,100,"black")
 
+
 #Create white magic
-cure=Spell("cure",10,120,"white")
+cure=Spell("Cure",10,120,"white")
 health=Spell("Health",20,200,"white")
 
+
+#Create some items
+potion = Item("Potion","potion","heals 50 HP",50)
+hipotion = Item("Hi-Potion","potion","Heals 100 HP",100)
+superpotion = Item("Super-potion","potion","Heals 200 HP ",200)
+elixer = Item("Elixer","elixer","Fully restored hp/mp",1000)
+hielixer = Item("Hi=Elixer","elixer","Fully restores party's gp/mp",1000)
+
+
+#Heavy explosives
+grenade=Item("Grenade","attack","Deals 500 damage",500)
+
+
+
 #Instantiate the players
-player = Person(600,65,60,34,[fire,thunder,blizzard,meteor,cure,health])
-enemy = Person(1200,65,30,20,[])
+player = Person(600,65,60,34,[fire,thunder,blizzard,meteor,cure,health],[])
+enemy = Person(1200,65,30,20,[],[])
 
 running = True
 
@@ -45,10 +63,15 @@ while running:
 
         player.reduce_mp(spell.cost)
 
-        enemy.take_damage(magic_dmg)
+        if spell.type=='white':
+            player.heal(magic_dmg)
+            print(bcolors.OKBLUE+ "\n"+ spell.name+" heals for"+ str(magic_dmg)+'HP'+bcolors.ENDC)
 
-        print("You attacked for "+str(magic_dmg)+"Enemy's hp: "+str(enemy.get_hp())+"with"+str(spell.name)+"spell")
-        print(" Enemy's hp: "+str(enemy.get_hp()))
+        elif spell.type=='black':
+            enemy.take_damage(magic_dmg)
+
+            print("You attacked for "+str(magic_dmg)+"Enemy's hp: "+str(enemy.get_hp())+"with"+str(spell.name)+"spell")
+        print(bcolors.FAIL  +"Enemy's hp: "+str(enemy.get_hp())+ bcolors.ENDC)
         print( bcolors.OKBLUE+ "Your mp:" +str(player.get_mp())+bcolors.ENDC)
 
     enemy_choice=1
