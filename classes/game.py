@@ -1,4 +1,6 @@
 import random
+from .magic import Spell
+import pprint
 class bcolors:                          #This is to display colors in terminal
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -23,16 +25,13 @@ class Person:                                    #displaying measurable quantity
 
     def generate_damage(self):                      #Generating random damage by hitting
         return random.randrange(self.atkl,self.atkh)
-    def spell_generate_damage(self,i):              #This is because spell are in form of array so i represents index number
-        mgl = self.magic[i]["dmg"] - 5
-        mgh = self.magic[i]["dmg"] + 5
-        return random.randrange(mgl,mgh)
+
     def take_damage(self,dmg):
         self.hp -= dmg
         if self.hp<0:
             self.hp=0
         return self.hp
-    def heal(self):
+    def heal(self,dmg):
         self.hp+=dmg
         if self.hp>self.maxhp:
             self.hp=self.maxhp
@@ -52,11 +51,6 @@ class Person:                                    #displaying measurable quantity
     def reduce_mp(self,cost):
         self.mp -= cost
 
-    def get_spell_name(self,i):
-        return self.magic[i]["name"]
-
-    def get_spell_cost(self,i):
-        return self.magic[i]["cost"]
 
     def choose_action(self):
         i=1
@@ -69,7 +63,7 @@ class Person:                                    #displaying measurable quantity
         i=1
         print("Magic")
         for spell in self.magic:
-            print(str(i)+':'+spell['name'] , '(cost' , str(spell["cost"])+')')
+            print(str(i)+':'+spell.name , '(cost' , str(spell.cost)+')')
             i+=1
 
 
