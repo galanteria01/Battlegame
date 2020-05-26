@@ -1,5 +1,6 @@
 import random
 from .magic import Spell
+from .inventory import Item
 import pprint
 class bcolors:                          #This is to display colors in terminal
     HEADER = '\033[95m'
@@ -22,7 +23,7 @@ class Person:                                    #displaying measurable quantity
         self.df = df
         self.magic = magic
         self.items=items
-        self.actions = ["attack","magic","items"]
+        self.actions = ["Attack","Magic","Items"]
 
     def generate_damage(self):                      #Generating random damage by hitting
         return random.randrange(self.atkl,self.atkh)
@@ -55,19 +56,25 @@ class Person:                                    #displaying measurable quantity
 
     def choose_action(self):
         i=1
-        print("Actions")
+        print("\n"+bcolors.OKGREEN +"ACTIONS"+bcolors.ENDC)
         for item in self.actions:
-            print(str(i)+':'+item)
+            print("      "+str(i)+':'+item)
             i+=1
 
     def choose_magic(self):
         i=1
-        print("Magic")
+        print("\n"+bcolors.OKGREEN+"MAGICS"+bcolors.ENDC)
         for spell in self.magic:
-            print(str(i)+':'+spell.name , '(cost' , str(spell.cost)+')')
+            print("      "+str(i)+':'+spell.name , '(cost' , str(spell.cost)+')')
             i+=1
-    def choose_items(self):
-        i=1
-        print("Items")
-        for
+
+    def choose_item(self):
+        i = 1
+
+        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "    ITEMS:" + bcolors.ENDC)
+        for item in self.items:
+            print("        " + str(i) + ".", item["item"].name + ":", item["item"].description,
+                  " (x" + str(item["quantity"]) + ")")
+            i += 1
+
 
