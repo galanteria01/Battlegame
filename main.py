@@ -58,8 +58,8 @@ while running:
 
     for player in players:
         player.get_stats()
-        print("\n")
-
+    print("\n")
+    enemy.get_enemy_stats()
     for player in players:
 
         player.choose_action()
