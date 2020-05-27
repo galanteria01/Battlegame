@@ -4,6 +4,10 @@ from classes.inventory import Item
 
 
 print("\n\n")
+print(bcolors.OKBLUE  + bcolors.BOLD+"Welcome to Game of battle"+bcolors.ENDC)
+print("\n\n")
+
+
 
 
 
@@ -39,7 +43,7 @@ player_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"i
 
 
 #Instantiate the players
-player1 = Person("Excelior:",3600,150,60,34,player_spells,player_items)
+player1 = Person("Peter:",3600,150,60,34,player_spells,player_items)
 player2 = Person("Valos:",4600,144,60,34,player_spells,player_items)
 player3 = Person("Bruce:",4200,132,60,34,player_spells,player_items)
 enemy = Person("Kratos",9000,2420,3000,20,[],[])
