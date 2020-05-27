@@ -13,7 +13,7 @@ class bcolors:                          #This is to display colors in terminal
     UNDERLINE = '\033[4m'
 
 class Person:                                    #displaying measurable quantity of things possessed by player
-    def __init__(self,name,hp,mp,atk,df,magic,items):
+    def __init__(self, name, hp, mp, atk, df, magic, items):
         self.name=name
         self.maxhp = hp
         self.hp = hp
@@ -80,10 +80,32 @@ class Person:                                    #displaying measurable quantity
             i += 1
 
     def get_stats(self):
+        hp_bar=""
+        bar_ticks=(self.hp/self.maxhp) * 25
+        while bar_ticks>0:
+            hp_bar+="█"
+            bar_ticks-=1
+        while len(hp_bar)<25:
+            hp_bar+=" "
+
+        mp_bar = ""
+        mp_ticks = (self.mp / self.maxmp) * 10
+        while mp_ticks > 0:
+            mp_bar += "█"
+            mp_ticks -= 1
+        while len(mp_bar) < 10:
+            mp_bar += " "
+
+
+
+
+
+
+
         print("Name                                          HP                                     MP")
         print("                                                                                               ")
         print(
-            bcolors.BOLD + self.name+"                           " + str(self.hp)+"/"+str(self.maxhp)+"|" + bcolors.OKGREEN + "███████████████████████  " + bcolors.ENDC
-            + "|       "+str(self.mp)+"/"+str(self.maxmp)+"|" + bcolors.OKBLUE + "██████████" + bcolors.ENDC + "|")
+            bcolors.BOLD + self.name+"                           " + str(self.hp)+"/"+str(self.maxhp)+"|" + bcolors.OKGREEN + hp_bar + bcolors.ENDC
+            + "|       "+str(self.mp)+"/"+str(self.maxmp)+"|" + bcolors.OKBLUE + mp_bar + bcolors.ENDC + "|")
 
 

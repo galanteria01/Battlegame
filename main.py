@@ -10,11 +10,11 @@ print("\n\n")
 
 
 #Create black magic
-fire=Spell("Fire",10,60,"black")
-thunder=Spell("Thunder",12,70,"black")
-blizzard=Spell("Blizzard",14,80,"black")
-meteor=Spell("Meteor",18,90,"black")
-quake=Spell("Quake",20,100,"black")
+fire=Spell("Fire",100,600,"black")
+thunder=Spell("Thunder",124,700,"black")
+blizzard=Spell("Blizzard",140,800,"black")
+meteor=Spell("Meteor",180,900,"black")
+quake=Spell("Quake",200,999,"black")
 
 
 #Create white magic
@@ -39,10 +39,10 @@ player_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"i
 
 
 #Instantiate the players
-player1 = Person("Excelior:",3600,65,60,34,player_spells,player_items)
-player2 = Person("Valos:",4600,65,60,34,player_spells,player_items)
-player3 = Person("Bruce:",4200,65,60,34,player_spells,player_items)
-enemy = Person("Kratos",9000,65,30,20,[],[])
+player1 = Person("Excelior:",3600,150,60,34,player_spells,player_items)
+player2 = Person("Valos:",4600,144,60,34,player_spells,player_items)
+player3 = Person("Bruce:",4200,132,60,34,player_spells,player_items)
+enemy = Person("Kratos",9000,2420,3000,20,[],[])
 
 players=[player1,player2,player3]
 
