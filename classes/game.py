@@ -13,7 +13,8 @@ class bcolors:                          #This is to display colors in terminal
     UNDERLINE = '\033[4m'
 
 class Person:                                    #displaying measurable quantity of things possessed by player
-    def __init__(self,hp,mp,atk,df,magic,items):
+    def __init__(self,name,hp,mp,atk,df,magic,items):
+        self.name=name
         self.maxhp = hp
         self.hp = hp
         self.maxmp = mp
@@ -56,14 +57,15 @@ class Person:                                    #displaying measurable quantity
 
     def choose_action(self):
         i=1
-        print("\n"+bcolors.OKGREEN +"ACTIONS"+bcolors.ENDC)
+        print("\n"+bcolors.BOLD+"    "+self.name+bcolors.ENDC)
+        print(bcolors.OKGREEN +"    ACTIONS"+bcolors.ENDC)
         for item in self.actions:
-            print("      "+str(i)+':'+item)
+            print("    "+str(i)+':'+item)
             i+=1
 
     def choose_magic(self):
         i=1
-        print("\n"+bcolors.OKGREEN+"MAGICS"+bcolors.ENDC)
+        print("\n"+bcolors.OKGREEN+"    MAGICS"+bcolors.ENDC)
         for spell in self.magic:
             print("      "+str(i)+':'+spell.name , '(cost' , str(spell.cost)+')')
             i+=1
@@ -76,5 +78,12 @@ class Person:                                    #displaying measurable quantity
             print("        " + str(i) + ".", item["item"].name + ":", item["item"].description,
                   " (x" + str(item["quantity"]) + ")")
             i += 1
+
+    def get_stats(self):
+        print("Name                                          HP                                     MP")
+        print("                                                                                               ")
+        print(
+            bcolors.BOLD + self.name+"                           " + str(self.hp)+"/"+str(self.maxhp)+"|" + bcolors.OKGREEN + "███████████████████████  " + bcolors.ENDC
+            + "|       "+str(self.mp)+"/"+str(self.maxmp)+"|" + bcolors.OKBLUE + "██████████" + bcolors.ENDC + "|")
 
 
