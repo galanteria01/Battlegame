@@ -34,6 +34,7 @@ class Person:                                    #displaying measurable quantity
         if self.hp<0:
             self.hp=0
         return self.hp
+
     def heal(self,dmg):
         self.hp += dmg
         if self.hp > self.maxhp:
@@ -191,10 +192,9 @@ class Person:                                    #displaying measurable quantity
     def choose_enemy_spell(self):
         magic_choice = random.randrange(0, len(self.magic))
         spell = self.magic[magic_choice]
-        magic_dmg = spell.damage_generate()
         pct = (self.hp/self.maxhp) * 100
-        if self.mp < spell.cost or spell.type == "White" and pct > 50:
-            self.choose_enemy_spell()
+        if self.mp < spell.cost or spell.type=="white" and pct > 50:
+            return self.choose_enemy_spell()
         else:
-            return spell, magic_dmg
+            return spell
 

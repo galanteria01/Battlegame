@@ -9,6 +9,6 @@ class Spell:                                             #Created spells to get 
     def damage_generate(self):
         low=self.dmg-15
         high=self.dmg+15
-        return random.randrange(low,high)
+        return random.randrange(low, high)
 
 

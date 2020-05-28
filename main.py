@@ -197,7 +197,8 @@ while running:
             print(enemy.name.replace(" ","")+" attacks for "+str(enemy_dmg)+" to "+players[target].name)
 
         elif enemy_choice == 1:
-            spell, magic_dmg = enemy.choose_enemy_spell()
+            spell = enemy.choose_enemy_spell()
+            magic_dmg = spell.damage_generate()
             enemy.reduce_mp(spell.cost)
             if spell.type=='white':
                 enemy.heal(magic_dmg)
