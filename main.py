@@ -7,6 +7,16 @@ import random
 
 print("\n\n")
 print(bcolors.OKBLUE  + bcolors.BOLD+"Welcome to Game of battle"+bcolors.ENDC)
+print("Enter 1 to start and 2 to quit or 3 for credits")
+num=int(input())
+if num==1:
+    pass
+elif num==2:
+    quit("Bye.Game has turned off.")
+elif num==3:
+    print("Game is developed and created by Shanuu under guidance of sir Joseph Delgadilo and Nick Germaine")
+
+
 print("\n\n")
 
 
@@ -43,15 +53,19 @@ player_spells=[fire,thunder,blizzard,meteor,cure,health]
 player_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"item":superpotion,"quantity": 5},
               {"item":elixer,"quantity": 5},{"item":hielixer,"quantity": 5},{"item":grenade,"quantity": 5}]
 
+enemy_spells=[fire,quake,cure,health]
+enemy_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"item":superpotion,"quantity": 5},
+              {"item":elixer,"quantity": 5},{"item":hielixer,"quantity": 5},{"item":grenade,"quantity": 5}]
+
 
 #Instantiate the players
 player1 = Person("Peter:" ,3600 ,400 ,60 ,34 ,player_spells ,player_items)
 player2 = Person("Valos:",4600,400,60,34,player_spells,player_items)
 player3 = Person("Bruce:",4200,400,60,34,player_spells,player_items)
 
-enemy1 = Person("Kratos",9000,420,300,20,[],[])
-enemy2 = Person("Thanos",1200,150,550,200,[],[])
-enemy3 = Person("Ronan",1500,180,215,235,[],[])
+enemy1 = Person("Kratos",9000,420,300,20,enemy_spells,enemy_items)
+enemy2 = Person("Thanos",1200,150,550,200,enemy_spells,enemy_items)
+enemy3 = Person("Ronan",1500,180,215,235,enemy_spells,enemy_items)
 
 players = [player1,player2,player3]
 enemies = [enemy1,enemy2,enemy3]
@@ -150,34 +164,59 @@ while running:
                     print(enemies[enemy].name + " Died! R.I.P")
                     del enemies[enemy]
 
-
-
-
-    enemy_choice=1
-    target=random.randrange(0,3)
-
-    enemy_dmg=enemies[0].generate_damage()
-
-    players[target].take_damage(enemy_dmg)
-    print("Enemy attacks for "+str(enemy_dmg))
-
-
+    #Check if battle ended.
     defeated_enemies = 0
     for enemy in enemies:
-        if enemy.get_hp()==0:
-            defeated_enemies+=1
+        if enemy.get_hp() == 0:
+            defeated_enemies += 1
 
-
-
-    defeated_players=0
+    defeated_players = 0
     for player in players:
-        if player.get_hp()==0:
-            defeated_players+=1
+        if player.get_hp() == 0:
+            defeated_players += 1
 
-    if defeated_enemies==3:
-        print(bcolors.OKGREEN +"You win",bcolors.ENDC)
-        running=False
+    #Check if player won
+    if defeated_enemies == 3:
+        print(bcolors.OKGREEN + "You win", bcolors.ENDC)
+        running = False
 
-    elif defeated_players==3:
-        print(bcolors.FAIL+"Your enemies defeated you!"+bcolors.ENDC)
-        running=False
+    #Check if rival won
+    elif defeated_players == 3:
+        print(bcolors.FAIL + "Your enemies defeated you!" + bcolors.ENDC)
+        running = False
+
+
+
+    #Enemy attack zone
+    for enemy in enemies:
+        enemy_choice=random.randrange(0,2)
+        if enemy_choice==0:                              #Enemy chose to attack
+            target=random.randrange(0,3)
+            enemy_dmg=enemies[0].generate_damage()
+            players[target].take_damage(enemy_dmg)
+            print(enemy.name.replace(" ","")+" attacks for "+str(enemy_dmg)+" to "+players[target].name)
+
+        elif enemy_choice== 1:
+            spell, magic_dmg = enemy.choose_enemy_spell()
+            enemy.reduce_mp(spell.cost)
+            print("Enemy "+"damage generated is"+str(magic_dmg))
+
+            if spell.type=='white':
+                enemy.heal(magic_dmg)
+                print(bcolors.OKBLUE+ "\n"+ spell.name+" heals"+enemy.name+" for"+ str(magic_dmg)+'HP'+bcolors.ENDC)
+
+            elif spell.type=='black':
+                target=random.randrange(0,3)
+                players[target].take_damage(magic_dmg)
+
+                print(enemy.name+" attacked for "+str(magic_dmg)+"with"+str(spell.name)+"spell"+" to "+players[target].name)
+
+                if players[target].get_hp() == 0:
+                    print(players[target].name + "Died")
+                    del players[target]
+
+
+
+
+
+
