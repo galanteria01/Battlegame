@@ -189,31 +189,55 @@ while running:
 
     #Enemy attack zone
     for enemy in enemies:
-        enemy_choice=random.randrange(0,2)
+        enemy_choice=random.randrange(0,3)
         if enemy_choice==0:                              #Enemy chose to attack
-            target=random.randrange(0,3)
+            target=random.randrange(0,len(players))
             enemy_dmg=enemies[0].generate_damage()
             players[target].take_damage(enemy_dmg)
             print(enemy.name.replace(" ","")+" attacks for "+str(enemy_dmg)+" to "+players[target].name)
 
-        elif enemy_choice== 1:
+        elif enemy_choice == 1:
             spell, magic_dmg = enemy.choose_enemy_spell()
             enemy.reduce_mp(spell.cost)
-            print("Enemy "+"damage generated is"+str(magic_dmg))
-
             if spell.type=='white':
                 enemy.heal(magic_dmg)
                 print(bcolors.OKBLUE+ "\n"+ spell.name+" heals"+enemy.name+" for"+ str(magic_dmg)+'HP'+bcolors.ENDC)
 
             elif spell.type=='black':
-                target=random.randrange(0,3)
+                target=random.randrange(0,len(players))
                 players[target].take_damage(magic_dmg)
 
-                print(enemy.name+" attacked for "+str(magic_dmg)+"with"+str(spell.name)+"spell"+" to "+players[target].name)
+                print(enemy.name+" attacked for "+str(magic_dmg)+"with"+str(spell.name)+"spell"+" to "
+                +players[target].name)
 
                 if players[target].get_hp() == 0:
                     print(players[target].name + "Died")
                     del players[target]
+
+
+        elif enemy_choice==2:
+            enemy.choose_magic()
+            choice_item=random.randrange(0,6)
+            item = enemy.items[choice_item]["item"]
+            if enemy.items[choice_item]["quantity"] == 0:
+                continue
+
+            enemy.items[choice_item]["quantity"] -= 1
+
+            if item.type == "potion":
+                enemy.heal(item.prop)
+                print(bcolors.OKBLUE + "\n" + str(item.name) + " heals for" + str(item.prop) + " HP " + bcolors.ENDC)
+            elif item.type == "elixer":
+                if item.name == "Hi-Elixer":
+                    for i in enemies:
+                        i.hp = i.maxhp
+                        i.mp = i.maxmp
+
+                enemy.hp = enemy.maxhp
+                enemy.mp = enemy.maxmp
+                print(bcolors.OKBLUE + "\n" + str(item.name) + " fully restored mp and hp" + bcolors.ENDC)
+
+
 
 
 
