@@ -54,6 +54,15 @@ class Person:                                    #displaying measurable quantity
     def reduce_mp(self,cost):
         self.mp -= cost
 
+    def choose_target(self,enemies):
+        i=0
+        print("\n" + bcolors.FAIL + bcolors.BOLD +"TARGET"+ bcolors.ENDC)
+        for enemy in enemies:
+            if enemy.get_hp()!=0:
+                print("        "+str(i+1)+"."+enemy.name)
+                i+=1
+        choice= int(input("     Choose target"))-1
+        return choice
 
     def choose_action(self):
         i=1
@@ -171,10 +180,6 @@ class Person:                                    #displaying measurable quantity
             current_mp += mp_string
         else:
             current_mp = mp_string
-
-
-
-
 
         print("Name                                       HP                                         MP")
         print("                                                                                               ")

@@ -1,5 +1,5 @@
 import random
-class Spell:
+class Spell:                                             #Created spells to get player some special attacking powers
     def __init__(self,name,cost,dmg,type):
         self.name=name
         self.cost=cost
