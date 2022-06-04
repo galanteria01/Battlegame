@@ -3,8 +3,6 @@ from classes.magic import Spell
 from classes.inventory import Item
 import random
 
-
-
 print("\n\n")
 print(bcolors.OKBLUE  + bcolors.BOLD+"Welcome to Game of battle"+bcolors.ENDC)
 print("Enter 1 to start and 2 to quit or 3 for credits")
@@ -18,12 +16,6 @@ elif num==3:
 
 
 print("\n\n")
-
-
-
-
-
-
 
 #Create black magic
 fire=Spell("Fire",100,600,"black")
@@ -56,7 +48,6 @@ player_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"i
 enemy_spells=[fire,quake,cure,health]
 enemy_items=[{"item":potion,"quantity": 15},{"item":hipotion,"quantity": 5},{"item":superpotion,"quantity": 5},
               {"item":elixer,"quantity": 5},{"item":hielixer,"quantity": 5},{"item":grenade,"quantity": 5}]
-
 
 #Instantiate the players
 player1 = Person("Peter:" ,3600 ,400 ,60 ,34 ,player_spells ,player_items)
@@ -237,11 +228,3 @@ while running:
                 enemy.hp = enemy.maxhp
                 enemy.mp = enemy.maxmp
                 print(bcolors.OKBLUE + "\n" + str(item.name) + " fully restored mp and hp" + bcolors.ENDC)
-
-
-
-
-
-
-
-

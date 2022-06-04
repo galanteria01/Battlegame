@@ -197,4 +197,3 @@ class Person:                                    #displaying measurable quantity
             return self.choose_enemy_spell()
         else:
             return spell
-

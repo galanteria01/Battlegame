@@ -5,4 +5,3 @@ class Item:                                                   #Created inventory
         self.type=type
         self.description=description
         self.prop=prop
-
